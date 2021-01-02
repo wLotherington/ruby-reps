@@ -70,3 +70,84 @@ footer {
 a {
   color: var(--white);
 }
+
+.button {
+  background-color: transparent;
+  border: 1px solid var(--focus-purple);
+  border-radius: 1rem;
+  color: var(--focus-purple);
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1rem;
+  line-height: 2rem;
+  outline: none;
+  padding: 0 1rem;
+}
+
+/* ---------- FORM ----------*/
+
+form.fancy {
+  background-color: var(--blue-light);
+  border-radius: 1.5rem;
+  margin: 0 auto;
+  padding: 1.5rem;
+  width: 300px;
+}
+
+form.fancy h2 {
+  color: var(--focus-purple);
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+form.fancy div {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+}
+
+form.fancy input[type="text"],
+form.fancy input[type="password"] {
+  border: none;
+  border-radius: 0.25rem;
+  line-height: 2rem;
+  margin-top: 0.25rem;
+  outline: none;
+  padding: 0 0.5rem;
+  width: 100%;
+}
+
+form.fancy dt {
+  margin-top: 1rem;
+}
+
+form.fancy hr {
+  border: none;
+  border-bottom: 1px solid var(--focus-purple);
+  margin: 1.5rem 0;
+}
+
+div.form-warning.fancy {
+  font-size: 0.8rem;
+  margin: 1rem auto;
+  width: calc(300px - 1.5rem);
+}
+
+div.form-warning.fancy b {
+  color: var(--focus-purple);
+  font-weight: bold;
+}
+
+div.form-warning.fancy p {
+  color: var(--gray);
+  line-height: 1rem;
+  margin-bottom: 1rem;
+  text-align: justify;
+}
+
+div.form-warning.fancy a {
+  color: var(--gray);
+}

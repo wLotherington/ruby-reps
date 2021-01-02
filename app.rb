@@ -26,17 +26,14 @@ require 'sinatra/reloader'
 # ---------- TOP LEVEL ----------
 
 get '/' do
-  #do home page
   erb :home
 end
 
 get '/instructions' do
-  #do instruction page
   erb :instructions
 end
 
 get '/about' do
-  #do about page
   erb :about
 end
 
@@ -52,7 +49,7 @@ end
 
 # users#new
 get '/users/new' do
-  #do registration page
+  erb :register
 end
 
 # users#create
@@ -64,7 +61,6 @@ end
 
 # session#new
 get '/login' do
-  #do login page
   erb :login
 end
 

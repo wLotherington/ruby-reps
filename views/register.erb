@@ -1,0 +1,27 @@
+<form method='post' action='/users' class="fancy">
+  <h2>Create Account</h2>
+  <dl>
+    <dt><label for="invitation">Enter Invitation Code</label></dt>
+    <dd><input type="password" name="invitation" id="invitation"></dd>
+    <hr>
+    <dt><label for="username">Enter Username</label></dt>
+    <dd><input type="text" name="username" id="username"></dd>
+    <dt><label for="password">Enter Password</label></dt>
+    <dd><input type="password" name="password" id="password"></dd>
+    <dt><label for="repassword">Re-Enter Password</label></dt>
+    <dd><input type="password" name="repassword" id="repassword"></dd>
+  </dl>
+  <div>
+    <a href="/login">Login</a>
+    <input type="submit" class="button" value="Create Account">
+  </div>
+</form>
+<div class="form-warning fancy">
+  <p>
+    <b>Warning:</b> Don't forget your password, there is currently no way to retrieve it.
+  </p>
+
+  <p>
+    <b>Note:</b> Ruby Reps is currently invite only. If you would like to request an invitation code, please email <a href="mailto:will.lotherington@hey.com" target="_blank">will.lotherington@hey.com</a>
+  </p>
+</div>
