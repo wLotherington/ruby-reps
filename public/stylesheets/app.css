@@ -1,0 +1,72 @@
+:root {
+  --blue-dark: #1b2733;
+  --blue-mid: #202d38;
+  --blue-light: #27323e;
+  --focus-blue: #9dffec;
+  --focus-purple: #867EFF;
+  --focus-red: #f95c5d;
+  --white: #e8e6e3;
+  --gray: #a4a9aa;
+  
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background-color: var(--blue-dark);
+  color: var(--white);
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Ubuntu, Arial, sans-serif;
+}
+
+#container {
+    box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100%;
+  margin: 0 auto;
+  max-width: 1000px;
+}
+
+header, main, footer {
+  padding: 1.5rem;
+}
+
+header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+h1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+h1 a {
+  text-decoration: none;
+}
+
+nav a {
+  margin-left: 1rem;
+  text-decoration: none;
+}
+
+main {
+  flex-grow: 1;
+}
+
+footer {
+  font-size: 0.8rem;
+  text-align: right;
+}
+
+a {
+  color: var(--white);
+}

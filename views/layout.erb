@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ruby Reps</title>
+  <link rel="stylesheet" href="/stylesheets/reset.css" />
+  <link rel="stylesheet" href="/stylesheets/app.css" />
+  <script src="/javascripts/jquery.js"></script>
+  <script src="/javascripts/app.js"></script>
+</head>
+<body>
+  <div id="container">
+    <header>
+      <h1>
+        <a href="/">Ruby Reps</a>
+      </h1>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/instructions">Instructions</a>
+        <a href="/about">About</a>
+        <a href="/login">Login</a>
+      </nav>
+    </header>
+    <main>
+      <%= yield %>
+    </main>
+    <footer>
+      <p>
+        Created by <a href="https://github.com/wlotherington" target="_blank">Will Lotherington</a>
+      </p>
+    </footer>
+  </div>
+</body>
+</html>
