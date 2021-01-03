@@ -1,0 +1,8 @@
+<% unless @user.errors.empty? %>
+  <ul class="errors">
+    <p>Please fix the following errors:</p>
+    <% @user.errors.each do |error| %>
+      <li><%= error %></li>
+    <% end %>
+  </ul>
+<% end %>

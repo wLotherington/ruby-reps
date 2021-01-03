@@ -91,7 +91,7 @@ form.fancy {
   border-radius: 1.5rem;
   margin: 0 auto;
   padding: 1.5rem;
-  width: 300px;
+  width: 350px;
 }
 
 form.fancy h2 {
@@ -111,10 +111,11 @@ form.fancy div {
 
 form.fancy input[type="text"],
 form.fancy input[type="password"] {
+  background-color: var(--white);
   border: none;
   border-radius: 0.25rem;
   line-height: 2rem;
-  margin-top: 0.25rem;
+  margin-top: 0.5rem;
   outline: none;
   padding: 0 0.5rem;
   width: 100%;
@@ -133,7 +134,7 @@ form.fancy hr {
 div.form-warning.fancy {
   font-size: 0.8rem;
   margin: 1rem auto;
-  width: calc(300px - 1.5rem);
+  width: calc(350px - 3rem);
 }
 
 div.form-warning.fancy b {
@@ -150,4 +151,24 @@ div.form-warning.fancy p {
 
 div.form-warning.fancy a {
   color: var(--gray);
+}
+
+form.fancy .errors {
+  color: var(--focus-red);
+  font-size: 0.8rem;
+  list-style-type: disc;
+  margin: 1.5rem 0;
+}
+
+form.fancy .errors li {
+  margin: .5rem 0 .5rem 1rem;
+}
+
+form.fancy .errors p {
+  font-weight: bold;
+}
+
+#login.logout {
+  border-color: var(--focus-red);
+  color: var(--focus-red);
 }

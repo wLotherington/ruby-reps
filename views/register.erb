@@ -1,11 +1,14 @@
-<form method='post' action='/users' class="fancy">
+<form method='post' action='/register' class="fancy">
   <h2>Create Account</h2>
+
+  <%= erb :_form_errors %>
+
   <dl>
     <dt><label for="invitation">Enter Invitation Code</label></dt>
-    <dd><input type="password" name="invitation" id="invitation"></dd>
+    <dd><input type="password" name="invitation" id="invitation" value="<%= @user.invitation %>"></dd>
     <hr>
     <dt><label for="username">Enter Username</label></dt>
-    <dd><input type="text" name="username" id="username"></dd>
+    <dd><input type="text" name="username" id="username" value="<%= @user.username %>"></dd>
     <dt><label for="password">Enter Password</label></dt>
     <dd><input type="password" name="password" id="password"></dd>
     <dt><label for="repassword">Re-Enter Password</label></dt>

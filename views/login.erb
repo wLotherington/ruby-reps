@@ -1,13 +1,16 @@
 <form method='post' action='/login' class="fancy">
   <h2>Login</h2>
+
+  <%= erb :_form_errors %>
+  
   <dl>
     <dt><label for="username">Username</label></dt>
-    <dd><input type="text" name="username" id="username"></dd>
+    <dd><input type="text" name="username" id="username" value="<%= @user.username %>"></dd>
     <dt><label for="password">Password</label></dt>
     <dd><input type="password" name="password" id="password"></dd>
   </dl>
   <div>
-    <a href="/users/new">Create Account</a>
+    <a href="/register">Create Account</a>
     <input type="submit" class="button" value="Login">
   </div>
 </form>

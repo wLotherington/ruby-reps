@@ -17,7 +17,7 @@
         <a href="/">Home</a>
         <a href="/instructions">Instructions</a>
         <a href="/about">About</a>
-        <a href="/login" class="button">Login</a>
+        <a href="/login" class="button" id="login" data-mode="<%= logged_in? ? 'logged-in' : 'logged-out' %>"><%= logged_in? ? current_user : 'Login' %></a>
       </nav>
     </header>
     <main>

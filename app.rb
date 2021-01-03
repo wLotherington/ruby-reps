@@ -1,27 +1,36 @@
 require 'sinatra'
 require 'sinatra/reloader'
+require 'open3'
+require 'byebug'
 
-# configure do
-#   enable :sessions
-# end
+require_relative 'db/database.rb'
+require_relative 'models/user.rb'
 
-# helpers do
-#   def logged_in?
-#     !!session[:username]
-#   end
+configure do
+  enable :sessions
+end
 
-#   def admin?
-#     session[:user_role] == 'admin'
-#   end
-# end
+helpers do
+  def logged_in?
+    !!current_user
+  end
 
-# before do
-#   @db = DB.new
-# end
+  def admin?
+    session[:user_role] == 'admin'
+  end
 
-# after do
-#   @db.disconnect
-# end
+  def current_user
+    session[:username]
+  end
+end
+
+before do
+  @db = DB.new
+end
+
+after do
+  @db.disconnect
+end
 
 # ---------- TOP LEVEL ----------
 
@@ -48,30 +57,48 @@ get '/users' do
 end
 
 # users#new
-get '/users/new' do
+get '/register' do
+  @user = User.new
   erb :register
 end
 
 # users#create
-post '/users' do
-  #do create new user
+post '/register' do
+  @user = User.new(params, @db)
+
+  if @user.save
+    login(@user)
+
+    redirect '/reps'
+  else
+    erb :register
+  end
 end
 
 # ---------- SESSION ----------
 
 # session#new
 get '/login' do
+  @user = User.new
   erb :login
 end
 
 # session#create
 post '/login' do
-  #do login
+  @user = User.new(params, @db)
+
+  if @user.valid_login?
+    login(@user)
+
+    redirect '/reps'
+  else
+    erb :login
+  end
 end
 
 # session#destroy
 get '/logout' do
-  #do logout
+  logout
 end
 
 # ---------- CARDS ----------
@@ -119,6 +146,11 @@ delete '/cards/:id' do
 end
 
 # ---------- REPS ----------
+
+# reps#index
+get '/reps' do
+  erb :home
+end
 
 # reps#edit
 get 'reps/:id/edit' do
@@ -168,4 +200,18 @@ end
 # invites#update
 put '/invites/:id' do
   #do update invite
+end
+
+private
+
+def login(user)
+  session[:username] = user.username
+  session[:user_id] = user.id
+  session[:user_role] = user.role
+end
+
+def logout
+  session[:username] = nil
+  session[:user_id] = nil
+  session[:user_role] = nil
 end
