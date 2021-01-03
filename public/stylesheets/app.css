@@ -25,7 +25,7 @@ body {
 }
 
 #container {
-    box-sizing: border-box;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -63,8 +63,14 @@ main {
   flex-grow: 1;
 }
 
+main.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
 footer {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   text-align: right;
 }
 
@@ -136,7 +142,7 @@ form.fancy hr {
 }
 
 div.form-warning.fancy {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   margin: 1rem auto;
   width: calc(350px - 3rem);
 }
@@ -159,7 +165,7 @@ div.form-warning.fancy a {
 
 form.fancy .errors {
   color: var(--focus-red);
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   list-style-type: disc;
   margin: 1.5rem 0;
 }
@@ -175,4 +181,83 @@ form.fancy .errors p {
 #login.logout {
   border-color: var(--focus-red);
   color: var(--focus-red);
+}
+
+/* ---------- reps ---------- */
+
+#reps {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card {
+  width: calc(50% - 0.75rem);
+}
+
+.cell {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+}
+
+.stats, .prompt {
+  height: 100px;
+}
+
+.card * {
+}
+
+.cell h2 {
+  background-color: var(--blue-dark);
+  border-bottom-left-radius: 1.5rem;
+  display: inline-block;
+  font-size: 0.75rem;
+  line-height: 1.5rem;
+  margin: -1.5rem -1.5rem 0 0;
+  padding: 0 1.5rem;
+}
+
+.cell .content {
+  line-height: 1.5rem;
+  width: 100%;
+}
+
+.prompt {
+  border: 2px solid var(--blue-light);
+  border-bottom: none;
+  overflow: scroll;
+}
+
+.prompt, .solution-code {
+  border-top-left-radius: 1.5rem;
+  border-top-right-radius: 1.5rem;
+}
+
+.prompt h2, .solution-code h2 {
+  border-top-right-radius: 1.5rem;
+}
+
+.prompt h2 {
+  margin: calc(-1.5rem - 2px) calc(-1.5rem - 2px) 0 0;
+}
+
+.prompt h2, .user-code h2, .solution-code h2 {
+  border: 2px solid var(--blue-light);
+}
+
+.user-return h2, .solution-return h2 {
+  border: 2px solid var(--blue-mid);
+}
+
+.user-code, .solution-code {
+  background-color: var(--blue-light);
+  height: 200px;
+}
+
+.user-return, .solution-return {
+  background-color: var(--blue-mid);
+  border-bottom-left-radius: 1.5rem;
+  border-bottom-right-radius: 1.5rem;
+  height: 100px;
 }

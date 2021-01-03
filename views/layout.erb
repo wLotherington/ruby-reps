@@ -6,7 +6,6 @@
   <link rel="stylesheet" href="/stylesheets/app.css" />
   <script src="/javascripts/jquery.js"></script>
   <script src="/javascripts/app.js"></script>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
   <div id="container">
@@ -15,7 +14,12 @@
         <a href="/">ruby_reps</a>
       </h1>
       <nav>
-        <a href="/">Home</a>
+        <% if admin? %>
+          <a href="/cards/new">Create Cards</a>
+        <% end %>
+        <% if logged_in? %>
+          <a href="/reps">Reps</a>
+        <% end %>
         <a href="/instructions">Instructions</a>
         <a href="/about">About</a>
         <a href="/login" class="button" id="login" data-mode="<%= logged_in? ? 'logged-in' : 'logged-out' %>"><%= logged_in? ? current_user : 'Login' %></a>

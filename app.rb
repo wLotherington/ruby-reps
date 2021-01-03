@@ -16,7 +16,7 @@ helpers do
   end
 
   def admin?
-    session[:user_role] == 'admin'
+    session[:user_role] == 'admin' && logged_in?
   end
 
   def current_user
@@ -35,7 +35,11 @@ end
 # ---------- TOP LEVEL ----------
 
 get '/' do
-  erb :home
+  if logged_in?
+    redirect '/reps'
+  else
+    erb :home
+  end
 end
 
 get '/instructions' do
@@ -111,8 +115,7 @@ end
 
 # cards#new
 get '/cards/new' do
-  #do card creation page
-    # ADMIN ONLY
+  erb :cards_new
 end
 
 # cards#create
@@ -149,7 +152,11 @@ end
 
 # reps#index
 get '/reps' do
-  erb :home
+  if logged_in?
+    erb :reps
+  else
+    redirect '/'
+  end
 end
 
 # reps#edit

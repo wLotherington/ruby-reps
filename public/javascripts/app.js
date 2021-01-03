@@ -12,6 +12,7 @@ $(function() {
 
   const UI = {
     $loginButton: $('#login'),
+    $main: $('main'),
 
     promptLogout: function() {
       let username = this.$loginButton.text();
@@ -44,8 +45,18 @@ $(function() {
       return this.$loginButton.data('mode');
     },
 
+    centerPages: function() {
+      const pages = ['/reps', '/cards/new'];
+
+      if (pages.indexOf(window.location.pathname) !== -1) {
+        this.$main.addClass('center');
+      } else {
+        this.$main.removeClass('center');
+      }
+    },
+
     init: function() {
-      //
+      this.centerPages();
     },
   };
 
@@ -68,6 +79,7 @@ $(function() {
 
     init: function() {
       this.bindEventListeners();
+      UI.init();
     },
   };
 
