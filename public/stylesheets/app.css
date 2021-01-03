@@ -114,6 +114,8 @@ form.fancy input[type="password"] {
   background-color: var(--white);
   border: none;
   border-radius: 0.25rem;
+  color: var(--blue-dark);
+  font-size: 1rem;
   line-height: 2rem;
   margin-top: 0.5rem;
   outline: none;

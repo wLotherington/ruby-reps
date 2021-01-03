@@ -6,6 +6,8 @@ class User
   
   def initialize(params = nil, db = nil)
     @errors = []
+
+    #do make invitation code checking database backed so you can expire them easily
     @admin_code = BCrypt::Password.new('$2a$12$dU/Nt6F2Rni1OsYuRa9bPOQl93pvnDX4zMmAnCRXTGGpRZhsypSOu')
     @invite_code = BCrypt::Password.new('$2a$12$kGq.EdwIJE3wWTfu8uh8XO/yqNXPVvuPOX.0G.xLhzR/pJw93mRiS')
 
@@ -68,7 +70,6 @@ class User
   end
 
   def validate_invitation
-    #do make database backed
     unless (@admin_code == @invitation) || (@invite_code == @invitation)
       @errors.push('Invalid invitation code') 
     end
