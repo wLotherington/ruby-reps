@@ -309,12 +309,17 @@ form.fancy .errors p {
 }
 
 .create-card-controls {
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
   margin-top: 1rem;
   text-align: right;
 }
 
 .create-card-controls .button {
+  padding: 0;
   margin-right: 0.5rem;
+  width: calc(25% - (3rem / 4) - 0.5rem);
 }
 
 /* ---------- reps ----------*/
