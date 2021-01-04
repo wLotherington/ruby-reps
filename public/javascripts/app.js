@@ -29,6 +29,7 @@ $(function() {
       }).done(function(data) {
         field.setValue(data);
         Reps.checkAnswer();
+        Reps.$submitButton.removeClass('disabled');
       });
     },
 
@@ -146,7 +147,7 @@ $(function() {
 
     checkAnswer: function() {
       let sameAnswer = UI.cmReturns[0].getValue() === UI.cmReturns[1].getValue();
-      let hasMethod = UI.cmCodes[0].getValue().indexOf(this.card['method']) !== -1;
+      let hasMethod = UI.cmCodes[0].getValue().indexOf(this.card['method'].trim()) !== -1;
 
       if (sameAnswer && hasMethod) {
         this.$buttons.removeClass('disabled');
@@ -216,7 +217,7 @@ $(function() {
       if (mode === 'run') {
         let code = UI.cmCodes[0].getValue();
         let returnField = UI.cmReturns[0];
-        
+        this.$submitButton.addClass('disabled');
         API.runUserScript(code, returnField);
       }
     },
