@@ -121,8 +121,11 @@ end
 
 # cards#create
 post '/cards' do
-  #do Create card
-    # ADMIN ONLY
+  # ADMIN ONLY
+  card_data = JSON.parse(request.body.read)
+  card = @db.cards_create(card_data)
+
+  card.to_json
 end
 
 # cards#show
@@ -173,7 +176,19 @@ end
 
 # reps#script
 post '/script' do
-  #do run user code
+  script = JSON.parse(request.body.read)['code']
+  file_path = 'public/scripts/script.rb'
+
+  open(file_path, 'w') { |f|
+    f.puts "return_value = ("
+    f.puts script
+    f.puts ")"
+    f.puts "p return_value"
+  }
+
+  return_value, stderr, status = Open3.capture3("ruby " + file_path)
+
+  stderr.empty? ? return_value.split("\n").last : 'ERROR'
 end
 
 # ---------- INVITES ----------

@@ -8,6 +8,28 @@ $(function() {
         $(location).attr('href', '/');
       });
     },
+
+    runScript: function(code, fields) {
+      $.ajax({
+        url: '/script',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({code: code}),
+      }).done(function(data) {
+        fields.forEach(field => field.setValue(data));
+      });
+    },
+
+    addCard: function(card) {
+      $.ajax({
+        url: '/cards',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(card),
+      }).done(function(data) {
+        CreateCards.clearSampleFields();
+      });
+    },
   };
 
   const UI = {
@@ -56,6 +78,7 @@ $(function() {
       this.cmReturns = [...document.getElementsByClassName('cm-return')].map(cmReturn => {
         return CodeMirror(cmReturn, {
           mode:  "none",
+          readOnly: "nocursor",
           theme: "monokai"
         });
       });
@@ -72,8 +95,77 @@ $(function() {
   };
 
   const CreateCards = {
+    $buttons: $('button'),
+    $prompt: $('textarea'),
+    $maskedPrompt: $('.masked-prompt'),
+
+    createStarterCode: function() {
+      let codePieces = this.code.split('#');
+      let starterCode = codePieces[0] + "# Enter code here" + (codePieces[2] || '');
+      let solutionCode = codePieces[1];
+
+      UI.cmCodes[1].setValue(starterCode);
+    },
+
+    createPrompt: function() {
+      let promptPieces = this.$prompt.val().replace(/\n/g, '<br>').split('$');
+      let prompt = '<span class="hide show">' + promptPieces[1] + '</span>' + (promptPieces[2] || '')
+      this.$maskedPrompt.html(prompt)
+    },
+
+    handleSubmitButton: function(e) {
+      e.preventDefault();
+      this.code = UI.cmCodes[0].getValue();
+
+      API.runScript(this.code, UI.cmReturns);
+      this.createStarterCode();
+      this.createPrompt();
+    },
+
+    handleResetButton: function(e) {
+      e.preventDefault();
+
+      UI.cmReturns.forEach(cmReturn => cmReturn.setValue(''));
+      UI.cmCodes.forEach(cmCode => cmCode.setValue(''));
+      this.$prompt.val('Method: $$');
+      this.$maskedPrompt.html('');
+    },
+
+    clearSampleFields: function() {
+      UI.cmReturns[1].setValue('');
+      UI.cmCodes[1].setValue('');
+      this.$maskedPrompt.html('');
+    },
+
+    handleAddButton: function(e) {
+      e.preventDefault();
+
+      let card = {
+        starterCode: UI.cmCodes[1].getValue(),
+        solutionCode: UI.cmCodes[0].getValue().replace(/\n#/g, ''),
+        prompt: this.$maskedPrompt.html().replace(" show", ''),
+        solutionReturnValue: UI.cmReturns[0].getValue(),
+      }
+
+      API.addCard(card);
+    },
+
+    bindEventListeners: function() {
+      this.$submitButton.on('click', e => this.handleSubmitButton(e));
+      this.$resetButton.on('click', e => this.handleResetButton(e));
+      this.$addButton.on('click', e => this.handleAddButton(e));
+    },
+
+    splitButtons: function() {
+      this.$resetButton = this.$buttons.eq(0);
+      this.$addButton = this.$buttons.eq(1);
+      this.$submitButton = this.$buttons.eq(2);
+    },
+
     init: function() {
       UI.addCodeMirrors();
+      this.splitButtons();
+      this.bindEventListeners();
     },
   };
 

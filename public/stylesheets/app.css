@@ -112,6 +112,11 @@ a {
   width: 3rem;
 }
 
+.danger {
+  border-color: var(--focus-red);
+  color: var(--focus-red);
+}
+
 /* ---------- FORM ----------*/
 
 form.fancy {
@@ -333,4 +338,29 @@ form.fancy .errors p {
 .user-controls .button {
   padding: 0;
   width: calc(25% - (3rem / 4) - 0.5rem);
+}
+
+
+span.hide::before {
+  border: 1px solid var(--focus-purple);
+  border-radius: 1rem;
+  display: inline-block;
+  color: var(--focus-purple);
+  content: 'Method?';
+  height: 2rem;
+  line-height: calc(2rem - 2px);
+  margin: -1.5rem 0.5rem 0.5rem 0;
+  padding: 0 1rem;
+}
+
+span.hide {
+  color: transparent;
+}
+
+span.hide:hover {
+  color: var(--white);
+}
+
+span.hide.show {
+  color: var(--white);
 }

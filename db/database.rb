@@ -45,6 +45,18 @@ class DB
   # cards#index
 
   # cards#create
+  def cards_create(card)
+    sql = <<~SQL
+            INSERT INTO cards (prompt, starter_code, solution_code, solution_return_value)
+            VALUES ($1, $2, $3, $4)
+            RETURNING *
+          SQL
+
+    result = query(sql, card['prompt'], card['starterCode'], card['solutionCode'], card['solutionReturnValue'])
+    card['id'] = result.first['id']
+
+    card
+  end
 
   # cards#show
   

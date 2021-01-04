@@ -8,7 +8,6 @@ CREATE TABLE users (
 -- CREATE TABLE cards (
 --   id serial PRIMARY KEY,
 --   prompt text,
---   method text,
 --   starter_code text NOT NULL,
 --   solution_code text NOT NULL,
 --   solution_return_value text NOT NULL
