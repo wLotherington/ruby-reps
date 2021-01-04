@@ -6,6 +6,10 @@
   <link rel="stylesheet" href="/stylesheets/app.css" />
   <script src="/javascripts/jquery.js"></script>
   <script src="/javascripts/app.js"></script>
+
+  <script src="/codemirror/lib/codemirror.js"></script>
+  <link rel="stylesheet" href="/codemirror/lib/codemirror.css">
+  <script src="/codemirror/mode/ruby/ruby.js"></script>
 </head>
 <body>
   <div id="container">
@@ -19,8 +23,8 @@
         <% end %>
         <% if logged_in? %>
           <a href="/reps">Reps</a>
+          <a href="/instructions">Instructions</a>
         <% end %>
-        <a href="/instructions">Instructions</a>
         <a href="/about">About</a>
         <a href="/login" class="button" id="login" data-mode="<%= logged_in? ? 'logged-in' : 'logged-out' %>"><%= logged_in? ? current_user : 'Login' %></a>
       </nav>

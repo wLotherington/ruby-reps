@@ -45,18 +45,37 @@ $(function() {
       return this.$loginButton.data('mode');
     },
 
-    centerPages: function() {
-      const pages = ['/reps', '/cards/new'];
+    centerPage: function() {
+      this.$main.addClass('center');
+    },
 
-      if (pages.indexOf(window.location.pathname) !== -1) {
-        this.$main.addClass('center');
-      } else {
-        this.$main.removeClass('center');
-      }
+    addCodeMirrors: function() {
+      // $('.cm-code').text('CODE').eq(0)
+      // $('.cm-return').text('return')
+
+      this.cmCodes = document.getElementsByClassName('cm-code').map(area => {
+        return CodeMirror(cm, {
+          value: "function myScript(){return 100;}\n",
+          mode:  "ruby"
+        });
+      });
     },
 
     init: function() {
-      this.centerPages();
+    },
+  };
+
+  const Reps = {
+    init: function() {
+      UI.centerPage();
+      UI.addCodeMirrors();
+    },
+  };
+
+  const CreateCards = {
+    init: function() {
+      UI.centerPage();
+      UI.addCodeMirrors();
     },
   };
 
@@ -77,9 +96,21 @@ $(function() {
       UI.$loginButton.on('click', e => this.handleLoginButton(e));
     },
 
+    initializePage: function() {
+      switch (this.page) {
+        case '/reps':
+          Reps.init();
+          break;
+        case '/cards/new':
+          CreateCards.init();
+          break;
+      }
+    },
+
     init: function() {
+      this.page = window.location.pathname;
+      this.initializePage();
       this.bindEventListeners();
-      UI.init();
     },
   };
 

@@ -115,7 +115,7 @@ end
 
 # cards#new
 get '/cards/new' do
-  erb :cards_new
+  erb :create_cards
 end
 
 # cards#create
