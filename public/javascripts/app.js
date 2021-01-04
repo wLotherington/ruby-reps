@@ -45,10 +45,6 @@ $(function() {
       return this.$loginButton.data('mode');
     },
 
-    centerPage: function() {
-      this.$main.addClass('center');
-    },
-
     addCodeMirrors: function() {
       this.cmCodes = [...document.getElementsByClassName('cm-code')].map(cmCode => {
         return CodeMirror(cmCode, {
@@ -71,14 +67,12 @@ $(function() {
 
   const Reps = {
     init: function() {
-      UI.centerPage();
       UI.addCodeMirrors();
     },
   };
 
   const CreateCards = {
     init: function() {
-      UI.centerPage();
       UI.addCodeMirrors();
     },
   };

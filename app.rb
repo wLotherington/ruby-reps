@@ -115,6 +115,7 @@ end
 
 # cards#new
 get '/cards/new' do
+  @center = true
   erb :create_cards
 end
 
@@ -152,6 +153,7 @@ end
 
 # reps#index
 get '/reps' do
+  @center = true
   if logged_in?
     erb :reps
   else

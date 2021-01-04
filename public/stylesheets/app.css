@@ -89,10 +89,27 @@ a {
   cursor: pointer;
   display: inline-block;
   font-size: 1rem;
-  line-height: 2rem;
+  height: 2rem;
+  line-height: calc(2rem - 2px);
   margin: 0;
   outline: none;
   padding: 0 1rem;
+}
+
+.action-button {
+  background-color: var(--focus-blue);
+  border: 1px solid var(--focus-blue);
+  border-radius: 1.5rem;
+  color: var(--blue-dark);
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: bold;
+  height: 3rem;
+  margin: 0;
+  outline: none;
+  text-align: center;
+  width: 3rem;
 }
 
 /* ---------- FORM ----------*/
@@ -265,7 +282,7 @@ form.fancy .errors p {
   height: 100px;
 }
 
-/* ---------- create cards----------*/
+/* ---------- create cards ----------*/
 
 #create-cards .prompt textarea {
   background-color: transparent;
@@ -289,4 +306,26 @@ form.fancy .errors p {
   background: transparent;
   font-size: 1rem;
   line-height: 1.2rem;
+}
+
+.create-card-controls {
+  margin-top: 1rem;
+  text-align: right;
+}
+
+.create-card-controls .button {
+  margin-right: 0.5rem;
+}
+
+/* ---------- reps ----------*/
+.user-controls {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.user-controls .button {
+  padding: 0;
+  width: calc(25% - (3rem / 4) - 0.5rem);
 }

@@ -31,7 +31,7 @@
         <a href="/login" class="button" id="login" data-mode="<%= logged_in? ? 'logged-in' : 'logged-out' %>"><%= logged_in? ? current_user : 'Login' %></a>
       </nav>
     </header>
-    <main>
+    <main <%= 'class="center"' if @center %>>
       <%= yield %>
     </main>
     <footer>
