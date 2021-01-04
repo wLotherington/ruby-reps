@@ -47,14 +47,14 @@ class DB
   # cards#create
   def cards_create(card)
     sql = <<~SQL
-            INSERT INTO cards (prompt, starter_code, solution_code, solution_return_value)
-            VALUES ($1, $2, $3, $4)
+            INSERT INTO cards (prompt, method, starter_code, solution_code, solution_return_value)
+            VALUES ($1, $2, $3, $4, $5)
             RETURNING *
           SQL
 
-    result = query(sql, card['prompt'], card['starterCode'], card['solutionCode'], card['solutionReturnValue'])
-    card['id'] = result.first['id']
 
+    result = query(sql, card['prompt'], card['method'], card['starterCode'], card['solutionCode'], card['solutionReturnValue'])
+    card['id'] = result.first['id']
     card
   end
 
@@ -65,6 +65,20 @@ class DB
   # cards#destroy
 
   # ---------- REPS ----------
+
+  def reps_all(user_id)
+    sql = <<~SQL
+            SELECT c.*, r.interval, r.easiness_factor, r.next_repetition_date
+              FROM cards c
+              LEFT JOIN reps r
+                ON c.id=r.card_id
+                AND r.user_id=$1
+          SQL
+
+    result = query(sql, user_id)
+    reps = result.map { |tuple| parse_rep(tuple) }
+    reps
+  end
 
   # reps#edit
 
@@ -86,4 +100,17 @@ class DB
     @db.exec_params(statement, params)
   end
 
+  def parse_rep(data)
+    {
+      id: data['id'],
+      prompt: data['prompt'],
+      method: data['method'],
+      starter_code: data['starter_code'],
+      solution_code: data['solution_code'],
+      solution_return_value: data['solution_return_value'],
+      interval: data['interval'],
+      easiness_factor: data['easiness_factor'],
+      next_repetition_date: data['next_repetition_date']
+    }
+  end
 end

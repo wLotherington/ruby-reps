@@ -364,3 +364,21 @@ span.hide:hover {
 span.hide.show {
   color: var(--white);
 }
+
+.button.disabled {
+  border-color: var(--blue-light);
+  color: var(--blue-light);
+  cursor: default;
+}
+
+.action-button.disabled {
+  background-color: var(--blue-light);
+  border-color: var(--blue-light);
+  cursor: default;
+}
+
+.button.selected {
+  background-color: var(--focus-purple);
+  color: var(--blue-dark);
+  cursor: pointer;
+}

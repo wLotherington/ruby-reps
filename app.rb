@@ -164,8 +164,15 @@ get '/reps' do
   end
 end
 
+
+get '/reps/all' do
+  reps = @db.reps_all(session[:user_id])
+
+  {reps: reps}.to_json
+end
+
 # reps#edit
-get 'reps/:id/edit' do
+get '/reps/:id/edit' do
   #do show rep page
 end
 
