@@ -377,7 +377,7 @@ span.hide.show {
   cursor: default;
 }
 
-.button.selected {
+.user-controls.button.selected {
   background-color: var(--focus-purple);
   color: var(--blue-dark);
   cursor: pointer;
