@@ -27,9 +27,9 @@ $(function() {
         contentType: 'application/json',
         data: JSON.stringify({code: code}),
       }).done(function(data) {
+        Reps.$submitButton.removeClass('disabled');
         field.setValue(data);
         Reps.checkAnswer();
-        Reps.$submitButton.removeClass('disabled');
       });
     },
 
