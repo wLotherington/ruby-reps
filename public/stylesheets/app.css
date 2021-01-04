@@ -222,7 +222,6 @@ form.fancy .errors p {
 }
 
 .cell .content {
-  line-height: 1.5rem;
   height: 100%;
   width: 100%;
 }
@@ -276,7 +275,7 @@ form.fancy .errors p {
   color: var(--white);
   font-size: 1rem;
   height: 100%;
-  line-height: 1.5rem;
+  line-height: 1.2rem;
   outline: none;
   resize: none;
   width: 100%;
@@ -284,4 +283,10 @@ form.fancy .errors p {
 
 #create-cards .prompt {
   overflow: hidden;
+}
+
+.cell .cm-s-monokai.CodeMirror {
+  background: transparent;
+  font-size: 1rem;
+  line-height: 1.2rem;
 }

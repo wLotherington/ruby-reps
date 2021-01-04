@@ -50,13 +50,17 @@ $(function() {
     },
 
     addCodeMirrors: function() {
-      // $('.cm-code').text('CODE').eq(0)
-      // $('.cm-return').text('return')
+      this.cmCodes = [...document.getElementsByClassName('cm-code')].map(cmCode => {
+        return CodeMirror(cmCode, {
+          mode:  "ruby",
+          theme: "monokai"
+        });
+      });
 
-      this.cmCodes = document.getElementsByClassName('cm-code').map(area => {
-        return CodeMirror(cm, {
-          value: "function myScript(){return 100;}\n",
-          mode:  "ruby"
+      this.cmReturns = [...document.getElementsByClassName('cm-return')].map(cmReturn => {
+        return CodeMirror(cmReturn, {
+          mode:  "none",
+          theme: "monokai"
         });
       });
     },
