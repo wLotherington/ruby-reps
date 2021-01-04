@@ -147,7 +147,10 @@ $(function() {
 
     checkAnswer: function() {
       let sameAnswer = UI.cmReturns[0].getValue() === UI.cmReturns[1].getValue();
-      let hasMethod = UI.cmCodes[0].getValue().indexOf(this.card['method'].trim()) !== -1;
+      let hasMethod = UI.cmCodes[0].getValue().indexOf(Reps.card['method']) !== -1;
+
+      console.log(this.card)
+      console.log(Reps.card)
 
       if (sameAnswer && hasMethod) {
         this.$buttons.removeClass('disabled');
