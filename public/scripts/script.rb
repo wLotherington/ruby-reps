@@ -1,6 +1,8 @@
 return_value = (
-a = [1, 2, 3]
+s = "Executable flashcards are great!"
 # Enter code here
-a.size
+s.split
+ .map { |w| w.include?('!') ? w.upcase : w }
+ .join(' ')
 )
 p return_value

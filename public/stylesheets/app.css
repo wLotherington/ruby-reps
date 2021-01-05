@@ -27,6 +27,41 @@ body {
   color: var(--white);
 }
 
+.greeting img {
+  box-sizing: border-box;
+  margin: 3rem;
+  width: calc(100% - 6rem);
+}
+
+.greeting {
+  line-height: 2rem;
+}
+
+.greeting ul {
+  list-style-type: disc;
+}
+
+.greeting dd {
+  margin-bottom: 1em;
+  margin-left: 3em;
+}
+
+.greeting dt {
+  color: var(--focus-purple);
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.greeting td, .greeting th {
+  border: 1px solid var(--white);
+  padding: 0.5rem 1rem;
+  text-align: center;
+}
+
+.greeting th {
+  font-weight: bold;
+}
+
 #container {
   box-sizing: border-box;
   display: flex;

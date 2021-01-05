@@ -36,6 +36,8 @@ end
 # ---------- TOP LEVEL ----------
 
 get '/' do
+  @center = true
+  
   if logged_in?
     redirect '/reps'
   else
