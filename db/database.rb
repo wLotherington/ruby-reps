@@ -68,7 +68,7 @@ class DB
 
   def reps_all(user_id)
     sql = <<~SQL
-            SELECT c.*, r.interval, r.easiness_factor, r.next_repetition_date
+            SELECT c.*, r.interval, r.easiness_factor, r.next_repetition_date, r.id AS rep_id
               FROM cards c
               LEFT JOIN reps r
                 ON c.id=r.card_id
@@ -82,7 +82,28 @@ class DB
 
   # reps#edit
 
-  # reps#update
+  def reps_update(card, user_id)
+    if card["rep_id"]
+      sql = <<~SQL
+              DELETE FROM reps WHERE id=$1;
+            SQL
+      result = query(sql, card["rep_id"])
+      card["rep_id"] = nil
+
+      reps_update(card, user_id)
+    else
+      sql = <<~SQL
+              INSERT INTO reps (user_id, card_id, interval, easiness_factor, next_repetition_date)
+              VALUES ($1, $2, $3, $4, $5)
+              RETURNING *
+            SQL
+
+
+      result = query(sql, user_id, card['id'], card['interval'], card['easiness_factor'], card['next_repetition_date'])
+      
+      result
+    end
+  end
 
   # reps#script
 
@@ -102,6 +123,7 @@ class DB
 
   def parse_rep(data)
     {
+      rep_id: data['rep_id'],
       id: data['id'],
       prompt: data['prompt'],
       method: data['method'],

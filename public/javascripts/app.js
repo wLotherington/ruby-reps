@@ -44,6 +44,27 @@ $(function() {
       });
     },
 
+    updateCard: function(card) {
+      $.ajax({
+        url: `/cards/${card['id']}`,
+        type: 'PUT',
+        contentType: 'application/json',
+        data: JSON.stringify(card),
+        dataType: 'json',
+      }).done(function(data) {
+        console.log(data['next_repetition_date'])
+        console.log(data['interval'])
+        console.log(new Date >= new Date(data['next_repetition_date']))
+        console.log(0)
+
+        if (new Date >= new Date(data['next_repetition_date'])) {
+          Reps.againCards.push(card)
+        }
+
+        Reps.loadNextCard();
+      });
+    },
+
     getAllReps: function() {
       $.ajax({
         url: '/reps/all',
@@ -116,7 +137,7 @@ $(function() {
     setCategory: function() {
       if (!this.interval) {
         this.category = 'new';
-      } else if (this.next_repetition_date <= new Date) {
+      } else if (new Date(this.next_repetition_date) <= new Date) {
         this.category = 'due';
       } else {
         this.category = 'done';
@@ -124,6 +145,7 @@ $(function() {
     },
 
     init: function(data) {
+      this.rep_id = data['rep_id'];
       this.id = data['id'];
       this.prompt = data['prompt'];
       this.method = data['method'];
@@ -145,12 +167,33 @@ $(function() {
     $submitButton: $('.action-button'),
     $prompt: $('.prompt .content'),
 
+    setupHotKeys: function() {
+      let keysPressed = {};
+
+      $(document).on('keydown', e => {
+        keysPressed[e.key] = true;
+
+        if (keysPressed['Meta'] && e.key == 'Enter') {
+          this.handleSubmitClick();
+        }
+
+        if (keysPressed['Meta'] && ("1234".indexOf(e.key) !== -1)) {
+          let $button = Reps.$buttons.eq(+e.key);
+
+          if ($button.hasClass('disabled')) return;
+          e.preventDefault();
+          this.handleButtonClick(null, $button);
+        }
+      })
+
+      $(document).on('keyup', e => {
+        delete keysPressed[e.key];
+      })
+    },
+
     checkAnswer: function() {
       let sameAnswer = UI.cmReturns[0].getValue() === UI.cmReturns[1].getValue();
       let hasMethod = UI.cmCodes[0].getValue().indexOf(Reps.card['method']) !== -1;
-
-      console.log(this.card)
-      console.log(Reps.card)
 
       if (sameAnswer && hasMethod) {
         this.$buttons.removeClass('disabled');
@@ -165,7 +208,7 @@ $(function() {
       this.cards = data["reps"].map(rep => Object.create(Card).init(rep));
       this.newCards = this.cards.filter(card => card.category === 'new');
       this.dueCards = this.cards.filter(card => card.category === 'due');
-      this.doneCards = this.cards.filter(card => card.category === 'done');
+      this.againCards = [];
     },
 
     nextCard: function() {
@@ -177,6 +220,10 @@ $(function() {
         let idx = Math.floor(Math.random() * this.dueCards.length);
 
         return this.dueCards.splice(idx, 1)[0];
+      } else if (this.againCards.length > 0) {
+        let idx = Math.floor(Math.random() * this.againCards.length);
+
+        return this.againCards.splice(idx, 1)[0];
       } else {
         return false;
       }
@@ -188,15 +235,25 @@ $(function() {
       if (!!this.card) {
         this.$prompt.html(this.card['prompt']);
         UI.cmCodes[0].setValue(this.card['starterCode']);
+        UI.cmCodes[1].setValue('');
+        UI.cmReturns[0].setValue('');
         UI.cmReturns[1].setValue(this.card['solutionReturnValue']);
+        this.$buttons.removeClass('selected');
+        this.$buttons.addClass('disabled');
+        this.$submitButton.data('mode', 'run');
+        this.$submitButton.text('Run')
       } else {
         alert("You're done!")
       }
     },
 
-    handleButtonClick: function(e) {
-      e.preventDefault();
-      let $button = $(e.target);
+    handleButtonClick: function(e, button) {
+      let $button = button;
+
+      if (e) {
+        e.preventDefault();
+        $button = $(e.target);
+      }
 
       if ($button.hasClass('disabled')) return;
 
@@ -213,7 +270,7 @@ $(function() {
     },
 
     handleSubmitClick: function(e) {
-      e.preventDefault();
+      if (e) e.preventDefault();
 
       let mode = this.$submitButton.data('mode');
 
@@ -222,6 +279,10 @@ $(function() {
         let returnField = UI.cmReturns[0];
         this.$submitButton.addClass('disabled');
         API.runUserScript(code, returnField);
+      } else if (mode === 'next') {
+        this.card["quality"] = $('.user-controls .selected').eq(0).text();
+
+        API.updateCard(this.card);
       }
     },
 
@@ -235,6 +296,7 @@ $(function() {
       UI.cmCodes[1].setOption('readOnly', 'nocursor')
       this.cards = API.getAllReps();
       this.bindEventListeners();
+      this.setupHotKeys();
     },
   };
 

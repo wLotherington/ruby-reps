@@ -15,6 +15,7 @@ CREATE TABLE cards (
 );
 
 CREATE TABLE reps (
+  id serial PRIMARY KEY,
   user_id integer NOT NULL REFERENCES users (id),
   card_id integer NOT NULL REFERENCES cards (id),
   interval integer NOT NULL,

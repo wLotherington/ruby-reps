@@ -5,6 +5,7 @@ require 'byebug'
 
 require_relative 'db/database.rb'
 require_relative 'models/user.rb'
+require_relative 'lib/sm2.rb'
 
 configure do
   enable :sessions
@@ -142,8 +143,23 @@ end
 
 # cards#update
 put '/cards/:id' do
-  #do update card info
-    # ADMIN ONLY
+  card = JSON.parse(request.body.read)
+  q = ['Again', 'Hard', 'Good', 'Easy']
+
+  quality = q.index(card['quality'])
+  sm2 = Sm2.new(quality)
+
+  card['next_repetition_date'] = sm2.next_repetition_date
+  card['interval'] = sm2.interval
+  card['easiness_factor'] = sm2.easiness_factor
+
+  @db.reps_update(card, session[:user_id]);
+
+  card['next_repetition_date'] = sm2.next_repetition_date
+  card['interval'] = sm2.interval
+  card['easiness_factor'] = sm2.easiness_factor
+
+  card.to_json
 end
 
 # cards#destroy

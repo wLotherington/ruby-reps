@@ -365,7 +365,7 @@ span.hide.show {
   color: var(--white);
 }
 
-.button.disabled {
+.user-controls .button.disabled {
   border-color: var(--blue-light);
   color: var(--blue-light);
   cursor: default;
@@ -377,7 +377,7 @@ span.hide.show {
   cursor: default;
 }
 
-.user-controls.button.selected {
+.user-controls .selected {
   background-color: var(--focus-purple);
   color: var(--blue-dark);
   cursor: pointer;
