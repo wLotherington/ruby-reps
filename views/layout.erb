@@ -28,7 +28,7 @@
           <a href="/instructions">Instructions</a>
         <% end %>
         <!-- <a href="/about">About</a> -->
-        <a href="/login" class="button" id="login" data-mode="<%= logged_in? ? 'logged-in' : 'logged-out' %>"><%= logged_in? ? current_user : 'Login' %></a>
+        <a href="/login" class="button" id="login" data-mode="<%= logged_in? ? 'logged-in' : 'logged-out' %>"><%= logged_in? ? current_user : 'Login / Register' %></a>
       </nav>
     </header>
     <main <%= 'class="center"' if @center %>>
