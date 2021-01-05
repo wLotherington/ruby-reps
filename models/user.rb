@@ -10,6 +10,7 @@ class User
     #do make invitation code checking database backed so you can expire them easily
     @admin_code = BCrypt::Password.new('$2a$12$dU/Nt6F2Rni1OsYuRa9bPOQl93pvnDX4zMmAnCRXTGGpRZhsypSOu')
     @invite_code = BCrypt::Password.new('$2a$12$kGq.EdwIJE3wWTfu8uh8XO/yqNXPVvuPOX.0G.xLhzR/pJw93mRiS')
+    @invite_code2 = BCrypt::Password.new("$2a$12$QMUNsHzMMcxsBJ8ylwytauvmhGLyxLCo5BypkK4plPU0jLqD69.j.")
 
     @db = db
     @invitation = ''
@@ -70,7 +71,7 @@ class User
   end
 
   def validate_invitation
-    unless (@admin_code == @invitation) || (@invite_code == @invitation)
+    unless (@admin_code == @invitation) || (@invite_code == @invitation) || (@invite_code2 == @invitation)
       @errors.push('Invalid invitation code') 
     end
   end
@@ -104,7 +105,7 @@ class User
   def determine_role
     if @admin_code == @invitation
       'admin'
-    elsif @invite_code == @invitation
+    elsif @invite_code == @invitation || @invite_code2 == @invitation
       'user'
     else
       'invalid'
