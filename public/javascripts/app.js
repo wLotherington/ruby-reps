@@ -243,7 +243,7 @@ $(function() {
         this.$submitButton.data('mode', 'run');
         this.$submitButton.text('Run')
       } else {
-        alert("You're done!")
+        $(location).attr('href', '/finished');
       }
     },
 

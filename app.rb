@@ -101,6 +101,10 @@ post '/login' do
   end
 end
 
+get '/finished' do
+  erb :finished
+end
+
 # session#destroy
 get '/logout' do
   logout
