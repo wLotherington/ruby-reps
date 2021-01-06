@@ -1,6 +1,6 @@
 return_value = (
-# Enter code here
-"asf"
-nil
+str = "hello world"
+#
+str.upcase
 )
 p return_value
