@@ -173,11 +173,11 @@ $(function() {
       $(document).on('keydown', e => {
         keysPressed[e.key] = true;
 
-        if (keysPressed['Meta'] && e.key == 'Enter') {
+        if ((keysPressed['Meta'] || keysPressed['Control'] || keysPressed['Alt']) && e.key == 'Enter') {
           this.handleSubmitClick();
         }
 
-        if (keysPressed['Meta'] && ("1234".indexOf(e.key) !== -1)) {
+        if ((keysPressed['Meta'] || keysPressed['Control'] || keysPressed['Alt']) && ("1234".indexOf(e.key) !== -1)) {
           let $button = Reps.$buttons.eq(+e.key);
 
           if ($button.hasClass('disabled')) return;
