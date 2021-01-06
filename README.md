@@ -1,8 +1,8 @@
 # `ruby_reps`
 
-Try it out: http://www.rubyreps.com/
-
-Feedback: [Will.Lotherington@hey.com](mailto:Will.Lotherington@hey.com)
+* **Try it out:** http://www.rubyreps.com/
+* **Stack:** `Ruby`, `JavaScript`, `jQuery`, `Sinatra`, `codemirror`
+* **Feedback:** [Will.Lotherington@hey.com](mailto:Will.Lotherington@hey.com)
 
 ### What is it?
 `ruby_reps` is a flashcard app specifically designed for Ruby programmers.
