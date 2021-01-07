@@ -1,6 +1,6 @@
 # `ruby_reps`
 
-* **Try it out:** [`ruby-reps`](http://www.rubyreps.com/)
+* **Try it out:** [http://www.rubyreps.com/](http://www.rubyreps.com/)
 * **Stack:** `Ruby`, `JavaScript`, `jQuery`, `Sinatra`, `codemirror`
 * **Feedback:** [Will.Lotherington@hey.com](mailto:Will.Lotherington@hey.com)
 
