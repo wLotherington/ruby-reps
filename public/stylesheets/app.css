@@ -292,7 +292,7 @@ form.fancy .errors p {
 .prompt {
   border: 2px solid var(--blue-light);
   border-bottom: none;
-  overflow: scroll;
+  overflow: hidden;
 }
 
 .prompt, .solution-code {
