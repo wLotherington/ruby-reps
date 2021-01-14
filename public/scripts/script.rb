@@ -1,6 +1,5 @@
 return_value = (
-str = "hello world"
-#
-str.upcase
+a = [1, 2, 3]
+a.pop
 )
 p return_value
