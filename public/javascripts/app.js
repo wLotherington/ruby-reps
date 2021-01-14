@@ -199,9 +199,11 @@ $(function() {
       if (sameAnswer && hasMethod) {
         this.$buttons.removeClass('disabled');
         UI.cmCodes[1].setValue(this.card['solutionCode']);
+        this.$solution.hide();
       } else {
         this.$buttons.addClass('disabled');
         UI.cmCodes[1].setValue('');
+        this.$solution.show();
       }
     },
 
@@ -242,7 +244,8 @@ $(function() {
         this.$buttons.removeClass('selected');
         this.$buttons.addClass('disabled');
         this.$submitButton.data('mode', 'run');
-        this.$submitButton.text('Run')
+        this.$submitButton.text('Run');
+        this.$solution.hide();
       } else {
         $(location).attr('href', '/finished');
       }
@@ -291,6 +294,7 @@ $(function() {
       e.preventDefault();
       this.$buttons.removeClass('disabled');
       UI.cmCodes[1].setValue(this.card['solutionCode']);
+      this.$solution.hide();
     },
 
     bindEventListeners: function() {
