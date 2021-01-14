@@ -166,6 +166,7 @@ $(function() {
     $buttons: $('.button'),
     $submitButton: $('.action-button'),
     $prompt: $('.prompt .content'),
+    $solution: $('.show-solution'),
 
     setupHotKeys: function() {
       let keysPressed = {};
@@ -286,9 +287,16 @@ $(function() {
       }
     },
 
+    handleSolutionClick: function(e) {
+      e.preventDefault();
+      this.$buttons.removeClass('disabled');
+      UI.cmCodes[1].setValue(this.card['solutionCode']);
+    },
+
     bindEventListeners: function() {
       this.$buttons.on('click', e => this.handleButtonClick(e));
       this.$submitButton.on('click', e => this.handleSubmitClick(e));
+      this.$solution.on('click', e => this.handleSolutionClick(e));
     },
 
     init: function() {

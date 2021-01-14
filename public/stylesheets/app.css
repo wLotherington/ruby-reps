@@ -423,3 +423,16 @@ span.hide.show {
   color: var(--blue-dark);
   cursor: pointer;
 }
+
+.show-solution {
+  border-color: var(--gray);
+  color: var(--gray);
+}
+
+.solution-controls {
+  align-items: center;
+  display: flex;
+  height: 3rem;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
