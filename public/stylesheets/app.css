@@ -427,6 +427,7 @@ span.hide.show {
 .show-solution {
   border-color: var(--gray);
   color: var(--gray);
+  display: none;
 }
 
 .solution-controls {

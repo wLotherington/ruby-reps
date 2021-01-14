@@ -1,5 +1,4 @@
 return_value = (
-a = [1, 2, 3]
-a.pop
+"asf"
 )
 p return_value
